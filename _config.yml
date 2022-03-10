@@ -21,7 +21,7 @@
 title: Omer Inanc
 email: inanccomer@gmail.com
 description: We’re all stories, in the end. Just make it a good one, eh? 
-baseurl: /blog # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: omerinanc.github.io # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: inanccomer
 github_username:  omerinanc
