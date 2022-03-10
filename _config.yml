@@ -20,17 +20,18 @@
 
 title: Omer Inanc
 email: inanccomer@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  We’re all stories, in the end. Just make it a good one, eh?
-#baseurl: /about # the subpath of your site, e.g. /blog
+description: We’re all stories, in the end. Just make it a good one, eh? 
+baseurl: /blog # the subpath of your site, e.g. /blog
 url: omerinanc.github.io # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: inanccomer
 github_username:  omerinanc
 
 # Build settings
-theme: minima
+theme: jekyll-theme-time-machine
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme # add this line to the plugins list if you already have one
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
