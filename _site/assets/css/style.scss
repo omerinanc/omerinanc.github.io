@@ -3,4 +3,4 @@
 
 @import "{{ site.theme }}";
 
-h1.title { margin: 30px 20px 10px; font-size: 45px; font-weight: bold; font-style: italic; font-family: Georgia, serif; text-align: left; }
+h1.title { margin: 30px 20px 10px; font-size: 45px !important; font-weight: bold; font-style: italic; font-family: Georgia, serif; text-align: left; }
