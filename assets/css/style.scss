@@ -17,3 +17,44 @@ h1.title {
     width: 750px;
     margin: 0 auto;
 }
+
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+nav{
+    background: #edeaea;
+    height: 80px;
+    width: %100;
+}
+
+label.logo{
+    color: black;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+nav ul li{
+    display: incline-block;
+    line-height: 80px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: black;
+    font-size: 17px;
+    text-transform: uppercase;
+}
+a.active,a:hover{
+    background: #ffffff;
+    transition: .5s;
+}
