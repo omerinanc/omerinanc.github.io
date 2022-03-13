@@ -43,7 +43,7 @@ nav ul{
     margin-right: 20px;
 }
 nav ul li{
-    display: incline-block;
+    display: inline-block;
     line-height: 80px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -57,4 +57,9 @@ nav ul li a{
 a.active,a:hover{
     background: #ffffff;
     transition: .5s;
+}
+.logo{
+    font-weight: bold;
+    font-style: italic;
+    font-family: Georgia, serif;
 }
