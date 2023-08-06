@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
-    "\\_posts"
+    "\\react-todo",
+    "\\react-todo\\src"
   ],
-  "SelectedNode": "\\assets\\css",
+  "SelectedNode": "\\react-todo\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }
