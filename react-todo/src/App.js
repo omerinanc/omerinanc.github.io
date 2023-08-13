@@ -2,17 +2,26 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 // importing components
 import { useLocalStorage } from '@rehooks/local-storage';
-
+import axios from 'axios';
 import Form from './components/form';
 import TodoList from './components/todolist';
 
+const API_URL = 'http://localhost:3000/api/v1/todos';
+const getAPIData = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+};
 function App() {
   const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState('all');
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [todosPersisted, setTodosPersisted] = useLocalStorage('todos');
-
   // run once when the app start
   useEffect(() => {
     getLocalTodos();
@@ -35,18 +44,18 @@ function App() {
         break;
     }
   };
-  // save to local
   const saveLocalTodos = () => {
-    setTodosPersisted(JSON.stringify(todos));
+    getAPIData().then((data) => {
+      setTodosPersisted(data);
+    });
   };
 
   const getLocalTodos = () => {
     if (todosPersisted === null) {
-      setTodosPersisted(JSON.stringify([]));
+      saveLocalTodos();
     } else {
       let todoLocal = todosPersisted;
       setTodos(todoLocal);
-      console.log(todoLocal);
     }
   };
 
@@ -66,5 +75,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

@@ -1,18 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 
 const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
-  //Here we can write js code and function
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
   };
-  const submitTodoHandler = (e) => {
+  const submitTodoHandler = async (e) => {
     e.preventDefault();
-    setTodos([...todos, { text: inputText, completed: false, id: Math.random() * 1000 }]);
-    setInputText('');
+    const newTodo = { id: Math.random() * 10000, text: inputText, completed: false };
+    try {
+      const response = await axios.post('http://localhost:3000/api/v1/todos', { todo: newTodo });
+      const savedTodo = response.data;
+      setTodos([...todos, savedTodo]);
+      setInputText('');
+    } catch (error) {
+      console.error('Error adding todo:', error);
+    }
   };
+
   const statusHandler = (e) => {
     setStatus(e.target.value);
   };
+
   return (
     <form>
       <input value={inputText} onChange={inputTextHandler} type="text" className="todo-input" />
@@ -30,5 +39,4 @@ const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
     </form>
   );
 };
-
 export default Form;
