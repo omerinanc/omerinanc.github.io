@@ -3,8 +3,45 @@ import axios from 'axios';
 
 const Todo = ({ text, todos, todo, setTodos }) => {
   const [deleteClicks, setDeleteClicks] = useState(0);
+  const [editMode, setEditMode] = useState(false);
+  const [editedText, setEditedText] = useState(text);
 
   //events
+  const handleEditButtonClick = () => {
+    setEditMode(true);
+  };
+
+  const handleEditInputChange = (event) => {
+    setEditedText(event.target.value);
+  };
+
+  const handleEditSubmit = async () => {
+    try {
+      const updatedTodo = {
+        ...todo,
+        text: editedText
+      };
+
+      await axios.put(`http://localhost:3000/api/v1/todos/${todo.id}`, updatedTodo);
+
+      setTodos(
+        todos.map((item) => {
+          if (item.id === todo.id) {
+            return {
+              ...item,
+              text: editedText
+            };
+          }
+          return item;
+        })
+      );
+
+      setEditMode(false);
+    } catch (error) {
+      console.error('Error updating todo:', error);
+    }
+  };
+
   const handleDeleteButtonClick = (event, id) => {
     event.preventDefault();
     setDeleteClicks(deleteClicks + 1);
@@ -51,13 +88,32 @@ const Todo = ({ text, todos, todo, setTodos }) => {
   };
   return (
     <div className="todo">
-      <li className={`todo-item ${todo.completed ? 'completed' : ''}`}>{text}</li>
+      {editMode ? (
+        <input
+          type="text"
+          value={editedText}
+          onChange={handleEditInputChange}
+          className="todo-item"
+          id="inputBoxShadow"
+        />
+      ) : (
+        <li className={`todo-item ${todo.completed ? 'completed' : ''}`}>{text}</li>
+      )}
       <button onClick={completeTodo} className="complete-btn">
         <i className="fas fa-check"></i>
       </button>
       <button onClick={(e) => handleDeleteButtonClick(e, todo.id)} className="trash-btn">
         <i className="fas fa-trash"></i>
       </button>
+      {editMode ? (
+        <button onClick={handleEditSubmit} className="edit-btn">
+          <i className="fas fa-edit"></i>
+        </button>
+      ) : (
+        <button onClick={handleEditButtonClick} className="edit-btn">
+          <i className="fas fa-edit"></i>
+        </button>
+      )}
     </div>
   );
 };

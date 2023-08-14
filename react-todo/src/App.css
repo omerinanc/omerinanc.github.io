@@ -68,13 +68,19 @@ form button:hover {
 .filter-todo {
   padding: 1rem;
 }
-
+.todo input {
+  flex: 1;
+  border: 0;
+  border-color: #ffffff;
+  font-size: 1.5rem;
+}
 .todo li {
   flex: 1;
 }
 
 .trash-btn,
-.complete-btn {
+.complete-btn,
+.edit-btn {
   background: #ff6f47;
   color: white;
   border: none;
@@ -86,13 +92,16 @@ form button:hover {
 .complete-btn {
   background: rgb(11, 212, 162);
 }
-
+.edit-btn {
+  background: blue;
+}
 .todo-item {
   padding: 0rem 0.5rem;
 }
 
 .fa-trash,
-.fa-check {
+.fa-check,
+.fa-edit {
   pointer-events: none;
 }
 
@@ -124,7 +133,11 @@ select {
   position: relative;
   overflow: hidden;
 }
-
+#inputBoxShadow {
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 255, 1);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 255, 1);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 255, 1);
+}
 select {
   color: #ff6f47;
   font-family: 'Poppins', sans-serif;
