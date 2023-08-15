@@ -133,11 +133,7 @@ const Todo = ({ text, todos, todo, setTodos }) => {
         <i className="fas fa-trash"></i>
       </button>
       {editMode ? (
-        <button
-          // type="submit"
-          onKeyDown={handleEnter}
-          onClick={handleEditSubmit}
-          className="edit-btn">
+        <button onClick={handleEditSubmit} className="edit-btn">
           <i className="fas fa-edit"></i>
         </button>
       ) : (
