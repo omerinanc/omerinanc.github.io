@@ -5,6 +5,7 @@ const Todo = ({ text, todos, todo, setTodos }) => {
   const [deleteClicks, setDeleteClicks] = useState(0);
   const [editMode, setEditMode] = useState(false);
   const [editedText, setEditedText] = useState(text);
+  // const [updated, setUpdated] = useState(text);
 
   //events
   const handleEditButtonClick = () => {
@@ -15,6 +16,31 @@ const Todo = ({ text, todos, todo, setTodos }) => {
     setEditedText(event.target.value);
   };
 
+  const handleEnter = async (e) => {
+    if (e.key === 'Enter') {
+      const updatedTodo = {
+        ...todo,
+        text: editedText
+      };
+      await axios.put(`http://localhost:3000/api/v1/todos/${todo.id}`, updatedTodo);
+
+      console.log(updatedTodo);
+      // handleEditSubmit;
+      console.log(editedText);
+      setTodos(
+        todos.map((item) => {
+          if (item.id === todo.id) {
+            return {
+              ...item,
+              text: editedText
+            };
+          }
+          return item;
+        })
+      );
+      setEditMode(false);
+    }
+  };
   const handleEditSubmit = async () => {
     try {
       const updatedTodo = {
@@ -92,12 +118,13 @@ const Todo = ({ text, todos, todo, setTodos }) => {
         <input
           type="text"
           value={editedText}
+          onKeyDown={handleEnter}
           onChange={handleEditInputChange}
           className="todo-item"
           id="inputBoxShadow"
         />
       ) : (
-        <li className={`todo-item ${todo.completed ? 'completed' : ''}`}>{text}</li>
+        <li className={'todo-item'}>{text}</li>
       )}
       <button onClick={completeTodo} className="complete-btn">
         <i className="fas fa-check"></i>
@@ -106,7 +133,11 @@ const Todo = ({ text, todos, todo, setTodos }) => {
         <i className="fas fa-trash"></i>
       </button>
       {editMode ? (
-        <button onClick={handleEditSubmit} className="edit-btn">
+        <button
+          // type="submit"
+          onKeyDown={handleEnter}
+          onClick={handleEditSubmit}
+          className="edit-btn">
           <i className="fas fa-edit"></i>
         </button>
       ) : (
